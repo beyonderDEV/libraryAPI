@@ -4,12 +4,12 @@ html(lang='en').w3-light-grey
     title Books
     link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
   body
-    #messages
-    if messages.error 
-      p= messages.error
     form.w3-display-container.w3-display-middle(action='/login', method='POST')
       div.w3-padding-32
         h1.w3-text-blue Login
+        #messages
+        if messages.error 
+          p.w3-red= messages.error
         div
           label.w3-text-blue(for='email') Email
               input.w3-input.w3-border#email(type='email', name='email', required='')
