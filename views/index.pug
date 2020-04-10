@@ -2,6 +2,7 @@ doctype html
 html(lang='en')
   head
     title Books
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
   body
     h1 Greetings, #{name}
     form(action='/logout?_method=DELETE', method='POST')
@@ -13,10 +14,11 @@ html(lang='en')
         label(for='deleteField') Name of book(s) :
         input#name(type='text', name='deleteBook')
         button(type='submit') Remove book
-    h3 Filters:
-    
+    h3 Filter:
+    label Enter here: 
+    input#myInput(type='text', placeholder='Search..')
     h3 List of books:
-    table.table.table-striped
+    table#table1.mytable.filterable
       tr 
         th Name
         th Author
@@ -24,13 +26,27 @@ html(lang='en')
         th In Library
         th Given To
         th Date to return
-      each book in allBooks
-        tr
-          td= book.bookName
-          td= book.bookAuthor
-          td= book.bookGenre
-          td= book.isInLibrary
-          td= book.givenTo
-          td= book.dateToReturn
-          td
-            a(href='/book/' + book.bookName ) View Card
+      tbody#myTable
+        each book in allBooks
+          tr.content
+            td= book.bookName
+            td= book.bookAuthor
+            td= book.bookGenre
+            td= book.isInLibrary
+            td= book.givenTo
+            td= book.dateToReturn
+            td
+              a(href='/book/' + book.bookName ) View Card
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')          
+  script.
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  
+    
