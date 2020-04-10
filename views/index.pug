@@ -1,0 +1,34 @@
+doctype html
+html(lang='en')
+  head
+    title Books
+  body
+    h1 Greetings, #{name}
+    form(action='/logout?_method=DELETE', method='POST')
+      button(type='submit') Log Out
+    form(action='/add_book', method='GET')
+      button(type='submit') Add book
+    h3 Remove book from library:
+    form(action='/delete_book?_method=DELETE', method='POST')
+        label(for='deleteField') Name of book(s) :
+        input#name(type='text', name='deleteBook')
+        button(type='submit') Remove book
+    h3 Filters:
+    
+    h3 List of books:
+    table.table.table-striped
+      tr 
+        th Name
+        th Author
+        th Genre
+        th In Library
+        th Given To
+      each book in allBooks
+        tr
+          td= book.bookName
+          td= book.bookAuthor
+          td= book.bookGenre
+          td= book.isInLibrary
+          td= book.givenTo
+          td
+            a(href='/book/' + book.bookName ) View Card

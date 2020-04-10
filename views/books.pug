@@ -1,0 +1,36 @@
+doctype html
+html(lang='en')
+  head
+    title Books
+  body
+    h1 #{book.bookName} card
+    form(action='/book/' + book.bookName + '?_method=PUT' method='post')
+      div
+        label(for='name') Name
+        input#name(type='text', name='name', value=book.bookName , required='')
+      div
+        label(for='author') Author
+        input#email(type='text', name='author', value=book.bookAuthor, required='')
+      div
+        label(for='genre') Genre
+        input#genre(type='text', name='genre', value=book.bookGenre, required='')
+      div
+      - var status = book.isInLibrary
+      #book
+        if status == 'Yes'
+            label(for='In Library') In Library
+            label(for='Yes') Yes
+            input#inLibrary(type='checkbox', name='inLibrary', value='Yes', checked)
+            label(for='No') No
+            input#inLibrary(type='checkbox', name='inLibrary', value='No')
+        else
+            label(for='In Library') In Library
+            label(for='Yes') Yes
+            input#inLibrary(type='checkbox', name='inLibrary', value='Yes')
+            label(for='No') No
+            input#inLibrary(type='checkbox', name='inLibrary', value='No', checked)
+      div
+        label(for='Given To') Given To
+        input#givenTo(type='text', name='givenTo', value=book.givenTo)
+      button(type='submit') Update information
+    a(href='/') Go back

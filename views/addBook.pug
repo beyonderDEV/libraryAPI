@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+  head
+    title Books
+  body
+    h1 Adding a book
+    form(action='/add_book', method='POST')
+      div
+        label(for='name') Name
+        input#name(type='text', name='name', required='')
+      div
+        label(for='author') Author
+        input#email(type='text', name='author', required='')
+      div
+        label(for='genre') Genre
+        input#genre(type='text', name='genre', required='')
+      div
+        label(for='In Library') In Library
+        label(for='Yes') Yes
+        input#inLibrary(type='checkbox', name='inLibrary', value='Yes')
+        label(for='No') No
+        input#inLibrary(type='checkbox', name='inLibrary', value='No')
+      div
+        label(for='Given To') Given To
+        input#givenTo(type='text', name='givenTo')
+      button(type='submit') Update information
+    a(href='/') Go back

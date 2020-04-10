@@ -1,0 +1,16 @@
+[
+    {
+      "bookName": "Book1",
+      "bookAuthor": "Author 1",
+      "bookGenre": "Genre 1",
+      "isInLibrary": true,
+      "givenTo": "None"
+    },
+    {
+      "bookName": "Book2",
+      "bookAuthor": "Author 2",
+      "bookGenre": "Genre 1",
+      "isInLibrary": false,
+      "givenTo": "Some user 1"
+    }
+]
