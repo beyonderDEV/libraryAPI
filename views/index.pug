@@ -27,16 +27,16 @@ html(lang='en')
         th Given To
         th Date to return
       tbody#myTable
-        each book in allBooks
-          tr.content
-            td= book.bookName
-            td= book.bookAuthor
-            td= book.bookGenre
-            td= book.isInLibrary
-            td= book.givenTo
-            td= book.dateToReturn
-            td
-              a(href='/book/' + book.bookName ) View Card
+          each book in allBooks
+            tr.content
+              td= book.bookName
+              td= book.bookAuthor
+              td= book.bookGenre
+              td= book.isInLibrary
+              td= book.givenTo
+              td= book.dateToReturn
+              td
+                a(href='/book/' + book.bookName ) View Card
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
   script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')          
   script.

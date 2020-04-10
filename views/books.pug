@@ -32,7 +32,7 @@ html(lang='en')
       div
         label(for='Given To') Give To
         select#users(name='users')
-          option(value='noone')
+          option(value='No one')
           each user in users
             option(value=user.name) #{user.name}
       div
