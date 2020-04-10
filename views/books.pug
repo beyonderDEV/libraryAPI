@@ -20,17 +20,23 @@ html(lang='en')
         if status == 'Yes'
             label(for='In Library') In Library
             label(for='Yes') Yes
-            input#inLibrary(type='checkbox', name='inLibrary', value='Yes', checked)
+            input#inLibrary(type='radio', name='inLibrary', value='Yes', checked)
             label(for='No') No
-            input#inLibrary(type='checkbox', name='inLibrary', value='No')
+            input#inLibrary(type='radio', name='inLibrary', value='No')
         else
             label(for='In Library') In Library
             label(for='Yes') Yes
-            input#inLibrary(type='checkbox', name='inLibrary', value='Yes')
+            input#inLibrary(type='radio', name='inLibrary', value='Yes')
             label(for='No') No
-            input#inLibrary(type='checkbox', name='inLibrary', value='No', checked)
+            input#inLibrary(type='radio', name='inLibrary', value='No', checked)
       div
-        label(for='Given To') Given To
-        input#givenTo(type='text', name='givenTo', value=book.givenTo)
+        label(for='Given To') Give To
+        select#users(name='users')
+          option(value='noone')
+          each user in users
+            option(value=user.name) #{user.name}
+      div
+        label(for='returnDate') Return to
+        input#returnDate(type="date", name='returnDate')
       button(type='submit') Update information
     a(href='/') Go back

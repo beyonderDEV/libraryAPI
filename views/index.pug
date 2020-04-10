@@ -23,6 +23,7 @@ html(lang='en')
         th Genre
         th In Library
         th Given To
+        th Date to return
       each book in allBooks
         tr
           td= book.bookName
@@ -30,5 +31,6 @@ html(lang='en')
           td= book.bookGenre
           td= book.isInLibrary
           td= book.givenTo
+          td= book.dateToReturn
           td
             a(href='/book/' + book.bookName ) View Card

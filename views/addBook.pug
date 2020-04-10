@@ -21,7 +21,13 @@ html(lang='en')
         label(for='No') No
         input#inLibrary(type='checkbox', name='inLibrary', value='No')
       div
-        label(for='Given To') Given To
-        input#givenTo(type='text', name='givenTo')
-      button(type='submit') Update information
+        label(for='Given To') Give To
+        select#users(name='users')
+          option(value='noone')
+          each user in users
+            option(value=user.name) #{user.name}
+      div
+        label(for='returnDate') Return to
+        input#returnDate(type="date", name='returnDate')
+      button(type='submit') Add book
     a(href='/') Go back

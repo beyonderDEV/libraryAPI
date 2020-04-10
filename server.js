@@ -9,7 +9,7 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-var books = require('./books.json')
+var allBooks = require('./books.json')
 
 const initializePassport = require('./passport-config')
 initializePassport(
@@ -19,50 +19,7 @@ initializePassport(
 )
 
 const users = []
-var allBooks = [
-  {
-    "bookName": "Book1",
-    "bookAuthor": "Author 1",
-    "bookGenre": "Genre 1",
-    "isInLibrary": 'Yes',
-    "givenTo": "None"
-  },
-  {
-    "bookName": "Book2",
-    "bookAuthor": "Author 2",
-    "bookGenre": "Genre 1",
-    "isInLibrary": "No",
-    "givenTo": "Some user 1"
-  },
-  {
-    "bookName": "Book3",
-    "bookAuthor": "Author 1",
-    "bookGenre": "Genre 1",
-    "isInLibrary": 'Yes',
-    "givenTo": "None"
-  },
-  {
-    "bookName": "Book4",
-    "bookAuthor": "Author 1",
-    "bookGenre": "Genre 1",
-    "isInLibrary": 'Yes',
-    "givenTo": "None"
-  },
-  {
-    "bookName": "Book5",
-    "bookAuthor": "Author 2",
-    "bookGenre": "Genre 1",
-    "isInLibrary": "No",
-    "givenTo": "Some user 1"
-  },
-  {
-    "bookName": "Book6",
-    "bookAuthor": "Author 2",
-    "bookGenre": "Genre 1",
-    "isInLibrary": "No",
-    "givenTo": "Some user 1"
-  }
-]
+
 
 
 
@@ -80,7 +37,8 @@ app.use(methodOverride('_method'))
 
 
 app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index.pug', { name: req.user.name, allBooks: allBooks })
+  res.render('index.pug', { name: req.user.name, allBooks: allBooks})
+  console.log(users)
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -118,7 +76,7 @@ app.delete('/logout', (req, res) => {
 })
 
 app.get('/add_book', checkAuthenticated, (req, res) => {
-  res.render('addBook.pug')
+  res.render('addBook.pug',  {users: users})
 })
 
 app.delete('/delete_book', checkAuthenticated, (req, res) => {
@@ -136,15 +94,16 @@ app.post('/add_book', checkAuthenticated, (req, res) => {
     bookAuthor: req.body.author,
     bookGenre: req.body.genre,
     isInLibrary: req.body.inLibrary,
-    givenTo: req.body.givenTo
+    givenTo: req.body.users,
+    dateToReturn : req.body.returnDate
   })
-  res.redirect('/') 
+  res.redirect('/')  
 }) 
 
 app.get('/book/:bookName', checkAuthenticated, (req, res) => {
   allBooks.forEach(book => {
     if (book.bookName === req.params.bookName){
-      res.render('books.pug', {book : book})
+      res.render('books.pug', {book : book, users : users})
     }
   })  
 }) 
@@ -155,7 +114,8 @@ app.put('/book/:bookName', checkAuthenticated, (req, res) => {
       allBooks[i].bookAuthor = req.body.author
       allBooks[i].bookGenre = req.body.genre
       allBooks[i].isInLibrary = req.body.inLibrary
-      allBooks[i].givenTo = req.body.givenTo 
+      allBooks[i].givenTo = req.body.users
+      allBooks[i].dateToReturn = req.body.returnDate
     }
   }
   console.log(allBooks)
