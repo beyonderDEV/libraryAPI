@@ -11,6 +11,8 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 var allBooks = require('./books.json')
 
+var PORT = process.env.PORT || 3000
+
 const initializePassport = require('./passport-config')
 initializePassport(
   passport,
@@ -134,4 +136,4 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
-app.listen(3000)
+app.listen(PORT)
